@@ -306,7 +306,7 @@ const starter=[
 {id:'demo3',name:'Natural Lighting Shader',category:'Shader',description:'Contoh shader untuk memberikan nuansa pencahayaan yang berbeda.\n\nVersi resource: tulis di sini\nVersi Minecraft: tulis di sini',downloadUrl:'',mediafireUrl:'',downloadNoNeed:false,mediafireNoNeed:false,image:'',emoji:'🌄'}
 ];
 let resources=load(),activeCategory='Semua',chosenImage='';
-function load(){try{let x=JSON.parse(localStorage.getItem(KEY));return Array.isArray(x)?x:starter.map(x=>({...x}))}catch{return starter.map(x=>({...x}))}}
+function load(){try{let x=JSON.parse(localStorage.getItem(KEY));if(Array.isArray(x)&&x.length&&!x.every(r=>['demo1','demo2','demo3'].includes(r.id)))return x;return starter.map(r=>({...r}))}catch{return starter.map(r=>({...r}))}}
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(resources))}catch(e){alert(tr[lang].storage);}}
 function escapeHTML(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function imgMarkup(r){return r.image?`<img class="cover" src="${escapeHTML(r.image)}" alt="${escapeHTML(r.name)}">`:`<div class="cover" style="display:grid;place-items:center;font-size:52px">${r.emoji||'📦'}</div>`}
